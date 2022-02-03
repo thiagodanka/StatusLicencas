@@ -94,7 +94,7 @@ function getUrl() {
                     userFatOff.innerHTML = liFat - usersFaturamento
                     userValOff.innerHTML = liVal - usersValidacao
                     userTotOff.innerHTML = liTot - onTot
-                    let aviso = `<img src="warn.svg"><span class="tooltiptext">Está ultrapassando o limite,PALHAÇO </span>`
+                    let aviso = `<img src="warn.svg"><span class="tooltiptext">Está ultrapassando o limite. </span>`
 
                     if(liCob - usersCobranca < 0 ){
                         userCobOff.classList.add("negativo")
