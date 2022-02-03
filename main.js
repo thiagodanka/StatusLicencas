@@ -51,7 +51,10 @@ let usersFaturamento = 0
 let usersValidacao = 0
 let usersCobranca = 0
 let onTot = 0
-
+let offcob = 0
+let offfat = 0
+let offsup = 0
+let offval = 0
 
 //================================ API
 
@@ -61,10 +64,16 @@ function getUrl() {
         .then((response) => {
             if (!response.ok) throw new Error('Erro ao executar requisição ' + response.status)
             response.json()
-                .then((data) => {     
+                .then((data) => {
 
                     //================================ Percorrendo API para localizar quantos usuarios onlines em cada setor
-
+                    function limpar() {
+                        usersSuporte = 0
+                        usersFaturamento = 0
+                        usersValidacao = 0
+                        usersCobranca = 0
+                    }                    
+                    limpar()
                     data.map((item) => {
                         if (item.setor == "Suporte") {
                             usersSuporte = usersSuporte + 1
@@ -78,10 +87,10 @@ function getUrl() {
                         if (item.setor == "Cobranca") {
                             usersCobranca = usersCobranca + 1
                         }
-
                     })
-                   
-                    //================================ Preenchendo a quantidade de usuarios Online                
+
+                    //================================ Preenchendo a quantidade de usuarios Online  
+
                     onTot = usersCobranca + usersFaturamento + usersSuporte + usersValidacao
                     userCobOn.innerHTML = usersCobranca
                     userSupOn.innerHTML = usersSuporte
@@ -89,33 +98,54 @@ function getUrl() {
                     userValOn.innerHTML = usersValidacao
                     userTotOn.innerHTML = `<p> ${onTot} </p>`
 
-                    userCobOff.innerHTML = liCob - usersCobranca  
-                    userSupOff.innerHTML = liSup - usersSuporte
-                    userFatOff.innerHTML = liFat - usersFaturamento
-                    userValOff.innerHTML = liVal - usersValidacao
+                    offcob = liCob - usersCobranca
+                    offfat = liFat - usersFaturamento
+                    offsup = liSup - usersSuporte
+                    offval = liVal - usersValidacao
+                    userCobOff.innerHTML = offcob
+                    userSupOff.innerHTML = offsup
+                    userFatOff.innerHTML = offfat
+                    userValOff.innerHTML = offval
                     userTotOff.innerHTML = liTot - onTot
-                    let aviso = `<img src="warn.svg"><span class="tooltiptext">Está ultrapassando o limite. </span>`
 
-                    if(liCob - usersCobranca < 0 ){
+                    let aviso = `<img src="warn.svg"><span class="tooltiptext">Está ultrapassando o limite. </span>`
+                    let a = ""
+                    if (liCob - usersCobranca < 0) {
                         userCobOff.classList.add("negativo")
-                        warnCobOff.innerHTML = aviso                        
+                        warnCobOff.innerHTML = aviso
+                    }else{
+                        userCobOff.classList.remove("negativo")   
+                        warnCobOff.innerHTML = a              
                     }
-                    if(liSup - usersSuporte < 0 ){
+                    if (liSup - usersSuporte < 0) {
                         userSupOff.classList.add("negativo")
-                        warnSupOff.innerHTML = aviso                        
+                        warnSupOff.innerHTML = aviso
+                    }else{
+                        userSupOff.classList.remove("negativo")
+                        warnSupOff.innerHTML = a
                     }
-                    if(liFat - usersFaturamento < 0 ){
+                    if (liFat - usersFaturamento < 0) {
                         userFatOff.classList.add("negativo")
-                        warnFatOff.innerHTML = aviso                        
+                        warnFatOff.innerHTML = aviso
+                    }else{
+                        userFatOff.classList.remove("negativo")
+                        warnFatOff.innerHTML = a
                     }
-                    if(liVal - usersValidacao < 0 ){
+                    if (liVal - usersValidacao < 0) {
                         userValOff.classList.add("negativo")
-                        warnValOff.innerHTML = aviso                        
+                        warnValOff.innerHTML = aviso
+                    }else{
+                        userValOff.classList.remove("negativo")
+                        warnValOff.innerHTML = a
                     }
-                    
+
                 })
         }).catch((error) => {
             console.error(error.message)
         })
 }
 getUrl()
+
+setInterval(getUrl, 1000);
+
+
