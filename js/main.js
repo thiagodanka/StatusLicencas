@@ -1,12 +1,17 @@
 //================================ Dark/Light Mod
 let darklight = document.querySelector('.darkLight')
+let htmlc = document.querySelector('html')
 
-    darklight.addEventListener("click", ()=> {
-    darklight.classList.toggle('light')
-    HTML.classList.toggle('light')  
-  })
+darklight.addEventListener("click", () => {
+    darklight.classList.toggle('dark')
+    htmlc.classList.toggle('light')
+})
 
-
+// cob: 601c7af7caae590031ea0d3d
+// suporte: 601c7af7caae590031ea0d3e  601c7af7caae590031ea0d3f
+// execução: 617963af2e18cf09771eab83
+// faturamento: 601da345e2a01a685018fc27
+// validacao: 601c7af7caae590031ea0d40   605ca3835e26961b0673a139
 
 //================================ Coluna Licenças
 
@@ -42,7 +47,7 @@ let userTotOff = document.querySelector('.total .offline')
 liCob = 3
 liFat = 1
 liSup = 10
-liVal = 13
+liVal = 12
 liTot = liCob + liFat + liSup + liVal;
 
 
@@ -70,11 +75,24 @@ let offval = 0
 
 function getUrl() {
 
-    fetch('http://localhost:3000/users')
+    const option = {
+        method: 'GET',
+        mode: 'cors',
+        cache: 'default',
+    }
+
+    const headers = {
+        "Access-Control-Allow-Origin": "Content-type"
+    }
+
+    fetch('http://10.253.0.149:8080/users', option)
         .then((response) => {
             if (!response.ok) throw new Error('Erro ao executar requisição ' + response.status)
             response.json()
-                .then((data) => {
+                .then((res) => {
+
+                    data = res[0].data
+                    console.log(data)
 
                     //================================ Percorrendo API para localizar quantos usuarios onlines em cada setor
                     function limpar() {
@@ -82,22 +100,34 @@ function getUrl() {
                         usersFaturamento = 0
                         usersValidacao = 0
                         usersCobranca = 0
-                    }                    
+                    }
                     limpar()
                     data.map((item) => {
-                        if (item.setor == "Suporte") {
+
+                        if (
+                            (item.campaigns[0].idEquipe == "601c7af7caae590031ea0d3e") ||
+
+                            (item.campaigns[0].idEquipe == "601c7af7caae590031ea0d3f")
+                        ) {
                             usersSuporte = usersSuporte + 1
                         }
-                        if (item.setor == "Faturamento") {
+
+                        if (item.campaigns[0].idEquipe == "601da345e2a01a685018fc27") {
                             usersFaturamento = usersFaturamento + 1
                         }
-                        if (item.setor == "Validacao") {
+                        if (
+                            (item.campaigns[0].idEquipe == "601c7af7caae590031ea0d40") ||
+                            (item.campaigns[0].idEquipe == "605ca3835e26961b0673a139") ||
+                            (item.campaigns[0].idEquipe == "617963af2e18cf09771eab83")
+                        ) {
                             usersValidacao = usersValidacao + 1
                         }
-                        if (item.setor == "Cobranca") {
+                        if (item.campaigns[0].idEquipe == "601c7af7caae590031ea0d3d") {
                             usersCobranca = usersCobranca + 1
                         }
                     })
+
+
 
                     //================================ Preenchendo a quantidade de usuarios Online  
 
@@ -123,28 +153,28 @@ function getUrl() {
                     if (liCob - usersCobranca < 0) {
                         userCobOff.classList.add("negativo")
                         warnCobOff.innerHTML = aviso
-                    }else{
-                        userCobOff.classList.remove("negativo")   
-                        warnCobOff.innerHTML = a              
+                    } else {
+                        userCobOff.classList.remove("negativo")
+                        warnCobOff.innerHTML = a
                     }
                     if (liSup - usersSuporte < 0) {
                         userSupOff.classList.add("negativo")
                         warnSupOff.innerHTML = aviso
-                    }else{
+                    } else {
                         userSupOff.classList.remove("negativo")
                         warnSupOff.innerHTML = a
                     }
                     if (liFat - usersFaturamento < 0) {
                         userFatOff.classList.add("negativo")
                         warnFatOff.innerHTML = aviso
-                    }else{
+                    } else {
                         userFatOff.classList.remove("negativo")
                         warnFatOff.innerHTML = a
                     }
                     if (liVal - usersValidacao < 0) {
                         userValOff.classList.add("negativo")
                         warnValOff.innerHTML = aviso
-                    }else{
+                    } else {
                         userValOff.classList.remove("negativo")
                         warnValOff.innerHTML = a
                     }
@@ -157,5 +187,3 @@ function getUrl() {
 getUrl()
 
 setInterval(getUrl, 1000);
-
-
