@@ -1,9 +1,35 @@
-:root{
-    --cor-bg-principal: #646a7c;
-    --cor-bg-segundary: rgb(226, 220, 220); 
-    --cor-bg-online:  rgb(226, 220, 220);
-    --cor-bg-offline:#ff8d47;
-    --cor-bg-header:#10131c; 
+
+:root{    
+    --cor-bg-container:hsl(226, 20%, 16%);
+    --cor-bg-principal:hsl(225, 27%, 9%); 
+    --cor-bg-linha1: hsl(225, 11%, 44%);
+    --cor-bg-linha2: hsl(0, 9%, 87%);  
+    --cor-bg-tooltip:rgb(231, 231, 231);  
+    --cor-bg-negativo:hsl(213, 73%, 45%);   
+}
+.light:root{
+    --cor-bg-container:hsla(237, 63%, 54%, 0.356);
+    --cor-bg-principal:hsl(237, 97%, 71%); 
+    --cor-bg-linha1: hsl(237, 70%, 82%);
+    --cor-bg-linha2: hsla(0, 0%, 93%, 0.39);  
+    --cor-bg-tooltip:rgb(172, 172, 172);  
+    --cor-bg-negativo:hsl(213, 73%, 45%); 
+}
+.darkLight{
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    top: 5px;
+    left: 80%;
+    background-image: url(dark.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.darkLight.light{
+    background-image: url(light.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
 }
 *{
     box-sizing: border-box;
@@ -11,8 +37,10 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 body{
-    background-color: #10131c;
+    background-color: var(--cor-bg-principal);
 }
+
+
 .container{
     width: 900px;
     height: 600px;
@@ -22,7 +50,7 @@ body{
     align-items: center;
     justify-content: center;
     border-radius: 5px;
-    background-color: #212532;
+    background-color: var(--cor-bg-container);
 }
 .header p{
     text-align: center;
@@ -38,8 +66,8 @@ body{
     visibility: hidden;
     font-size: 12px;
     width: 180px;
-    background-color: rgb(231, 231, 231);
-    color: rgb(0, 0, 0);
+    background-color: var(--cor-bg-tooltip);
+    color: var(--cor-bg-principal);
     text-align: center;
     border-radius: 6px;
     padding: 5px 0;
@@ -55,9 +83,9 @@ body{
   }
 
 .container .row .negativo{   
-    box-shadow: 0 0 5px rgb(66, 66, 66);
-    color: #fafafa;   
-    background-color: #1f6bc5;    
+    box-shadow: 0 5px 5px var(--cor-bg-container);
+    color: var(--cor-bg-linha2);   
+    background-color: var(--cor-bg-negativo);    
     width: 65px;
     height: 55px; 
     display: flex;
@@ -88,30 +116,30 @@ p{
 
 
 .header .setor{
-    background-color: var(--cor-bg-header);
-    color: #fafafa;
+    background-color: var(--cor-bg-principal);
+    color: var(--cor-bg-linha2);
     border-radius: 5px 0 0 0;
 }
 .cobranca .setor{
-    background-color: var(--cor-bg-principal);
+    background-color: var(--cor-bg-linha1);
     display: flex;
     justify-content: left;
     padding-left: 10px;
 }
 .faturamento .setor{
-    background-color: var(--cor-bg-segundary);
+    background-color: var(--cor-bg-linha2);
     display: flex;
     justify-content: left;
     padding-left: 10px;
 }
 .suporte .setor{
-    background-color: var(--cor-bg-principal);
+    background-color: var(--cor-bg-linha1);
     display: flex;
     justify-content: left;
     padding-left: 10px;
 }
 .validacao .setor{
-    background-color: var(--cor-bg-segundary);
+    background-color: var(--cor-bg-linha2);
     display: flex;
     justify-content: left;
     padding-left: 10px;
@@ -131,61 +159,61 @@ p{
 
 
 .header .licenca{
-    background-color: var(--cor-bg-header)  ;
-    color: #fafafa;
+    background-color: var(--cor-bg-principal)  ;
+    color: var(--cor-bg-linha2);
 }
 .cobranca .licenca{
-    background-color: var(--cor-bg-principal)  
+    background-color: var(--cor-bg-linha1)  
 }
 .faturamento .licenca{
-    background-color: var(--cor-bg-segundary)    
+    background-color: var(--cor-bg-linha2)    
 }
 .suporte .licenca{
-    background-color: var(--cor-bg-principal) 
+    background-color: var(--cor-bg-linha1) 
 }
 .validacao .licenca{
-    background-color: var(--cor-bg-segundary)    
+    background-color: var(--cor-bg-linha2)    
 }
 .cobranca .online{
-    background-color: var(--cor-bg-principal)
+    background-color: var(--cor-bg-linha1)
 }
 .faturamento .online{
-    background-color: var(--cor-bg-segundary)
+    background-color: var(--cor-bg-linha2)
 }
 .suporte .online{
-    background-color: var(--cor-bg-principal)
+    background-color: var(--cor-bg-linha1)
 }
 .validacao .online{
-    background-color: var(--cor-bg-segundary)
+    background-color: var(--cor-bg-linha2)
 }
 .cobranca .offline{
-    background-color: var(--cor-bg-principal)
+    background-color: var(--cor-bg-linha1)
 }
 .faturamento .offline{
-    background-color: var(--cor-bg-segundary)
+    background-color: var(--cor-bg-linha2)
 }
 .suporte .offline{
-    background-color: var(--cor-bg-principal)
+    background-color: var(--cor-bg-linha1)
 }
 .validacao .offline{
-    background-color: var(--cor-bg-segundary)
+    background-color: var(--cor-bg-linha2)
 }
 .total .licenca{
-    background-color: var(--cor-bg-header);
-    color: #fafafa;
+    background-color: var(--cor-bg-principal);
+    color: var(--cor-bg-linha2);
 }
 .total .setor{
-    background-color: var(--cor-bg-header);
-    color: #fafafa;
+    background-color: var(--cor-bg-principal);
+    color: var(--cor-bg-linha2);
     border-radius: 0 0 0 5px;
 }
 .total .online{
-    background-color: var(--cor-bg-header);
-    color: #fafafa;
+    background-color: var(--cor-bg-principal);
+    color: var(--cor-bg-linha2);
 }
 .total .offline{
-    background-color: var(--cor-bg-header);
-    color: #fafafa;
+    background-color: var(--cor-bg-principal);
+    color: var(--cor-bg-linha2);
     border-radius: 0 0 5px 0;
 }
 
@@ -193,15 +221,14 @@ p{
     width: 10rem;
     height: 5rem;   
     font-size: 25px;
-    font-weight: bold;
-    color:rgb(0, 0, 0);    
+    font-weight: bold;    
     display: flex;
     justify-content: center;
     align-items: center;
 }
 .header .online{
-    background-color: var(--cor-bg-header);
-    color: #fafafa;
+    background-color: var(--cor-bg-principal);
+    color: var(--cor-bg-linha2);
 }
 .offline{
     width: 10rem;
@@ -214,7 +241,7 @@ p{
     align-items: center;  
 }
 .header .offline{
-    background-color: var(--cor-bg-header);
-    color: #fafafa;
+    background-color: var(--cor-bg-principal);
+    color: var(--cor-bg-linha2);
     border-radius: 0 5px 0 0;
 }
