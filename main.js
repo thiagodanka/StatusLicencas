@@ -1,3 +1,13 @@
+//================================ Dark/Light Mod
+let darklight = document.querySelector('.darkLight')
+
+    darklight.addEventListener("click", ()=> {
+    darklight.classList.toggle('light')
+    HTML.classList.toggle('light')  
+  })
+
+
+
 //================================ Coluna Licenças
 
 let licCob = document.querySelector('.cobranca .licenca')
